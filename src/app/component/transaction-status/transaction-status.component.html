@@ -1,0 +1,122 @@
+
+<div class="12u$">
+    <div class="select-wrapper">
+        <select name="category" id="category">
+            <option value="">- Category -</option>
+            <option value="1">Manufacturing</option>
+            <option value="1">Shipping</option>
+            <option value="1">Administration</option>
+            <option value="1">Human Resources</option>
+        </select>
+    </div>
+</div>
+<div class="myhash_coin_detail">
+    <div>
+      <p class="myhash_coin_price_detail">29,790,000</p>
+      <p>전일 대비 -0.64%    191,000</p>
+      <p>고가 30,571,000  저가 29,537,000</p>
+    </div>
+    <div><p>그래프</p></div>
+</div>
+
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="오더북">
+        <div class="table-wrapper">
+            <table>
+                
+                <tbody>
+                    <tr style="background-color: white;">
+                        <td></td>
+                        <td></td>
+                        <td rowspan=8 style="background-color: white;"></td>
+                    </tr>
+                    <tr *ngFor="let order of selling20" [ngStyle]="{'background-color': order.gubun === 'I' ? '#FFDCDC':'#DCEBFF'}" > 
+                        <td class="myhash_date_font" > {{ order.amount }}</td>
+                        <td class="myhash_date_font">{{ order.usdPrice }}</td>
+                    </tr>
+                    <tr style="background-color: white;">
+                        <td rowspan=21 style="background-color: white;"></td>
+                        <td class="myhash_date_font" style="background-color:#FFDCDC;">22927.70</td>
+                        <td class="myhash_date_font" style="background-color:#FFDCDC;">0.0011</td>
+                    </tr>
+                    <tr *ngFor="let order of buying20" [ngStyle]="{'background-color': order.gubun === 'I' ? '#FFDCDC':'#DCEBFF'}">
+                        <td class="myhash_date_font">{{ order.usdPrice }}</td>
+                        <td class="myhash_date_font">{{ order.amount }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+        </div>
+    </mat-tab>
+    <mat-tab label="Second">Content 2</mat-tab>
+    <mat-tab label="최근거래">
+        <div class='myhahsh_container'>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="myhash_fixed_header">가격 (USD)</th>
+                            <th class="myhash_fixed_header">수량 (BTC)</th>
+                            <th class="myhash_fixed_header">시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tx of recentTransactionList">
+                            <td class="myhash_date_font" [ngStyle]="{'color': tx.gubun === 'I' ? 'red':'blue'}">{{tx.gubun ==='I' ? '↑' : '↓'}} {{ tx.usdPrice }}</td>
+                            <td class="myhash_date_font">{{ tx.amount }}</td>
+                            <td class="myhash_date_font">{{ tx.regDate | date: 'MM.dd HH:mm:ss' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+        </mat-tab>
+  </mat-tab-group>
+
+  
+
+
+
+  <!--
+    <div class="mat-elevation-z8 example-container">
+            <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
+    
+      <ng-container matColumnDef="usdPrice">
+        <th mat-header-cell *matHeaderCellDef> 가격 (USD) </th>
+        <td mat-cell *matCellDef="let element" [ngStyle]="{'color': element.gubun === 'I' ? 'red':'blue'}"> {{element.gubun ==='I' ? '↑' : '↓'}}   {{element.usdPrice}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> 수량 (BTC) </th>
+        <td mat-cell *matCellDef="let element"> {{element.amount}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="regDate">
+        <th mat-header-cell *matHeaderCellDef style="text-align: right;"> 시간 </th>
+        <td mat-cell *matCellDef="let element"> {{element.regDate | date: 'yy.MM.dd HH:mm:ss'}} </td>
+    </ng-container>
+
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter </td>
+      </tr>
+    </table>
+
+
+
+  </div>
+
+
+
+
+
+
+  -->
+  

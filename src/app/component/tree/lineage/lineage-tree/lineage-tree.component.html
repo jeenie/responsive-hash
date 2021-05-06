@@ -1,0 +1,224 @@
+<header>
+    <h2>리니지 트리</h2>
+    <form method="post" action="#">
+        <div class="row uniform">
+            <div class="4u 12u$(small)">
+                <input type="text" name="viewUserInput" id="viewUserInput" [(ngModel)]="viewUserInput"
+                    placeholder="아이디를 입력하세요." />
+            </div>
+            <div class="2u$ 12u$(small)">
+                <input type="submit" value="변경" class="fit special" (click)="changeViewUser()" />
+            </div>
+        </div>
+    </form>
+</header>
+<hr />
+
+<div class="row">
+    <div class="6u 12u$(small)">
+        <dl>
+            <dt>총 매출액</dt>
+            <dd>
+                <p>{{total[0]}} USD</p>
+                <p>{{total[1].toFixed(8)}} BTC</p>
+            </dd>
+
+        </dl>
+    </div>
+    <div class="6u$ 12u$(small)">
+        <dl>
+            <dt>총 보상액</dt>
+            <dd>
+                <p>{{total[2].toFixed(8)}} BTC</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<hr />
+
+<h4>회원목록</h4>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Item 1</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 2</td>
+                <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 3</td>
+                <td> Morbi faucibus arcu accumsan lorem.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 4</td>
+                <td>Vitae integer tempus condimentum.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 5</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>100.00</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<hr />
+
+<h3><b>{{selectNodeObj.USER_ID || "아이디"}}</b></h3>
+<div class="row">
+    <div class="4u 12u$(small)">
+        <dl>
+            <dt>가입일</dt>
+            <dd>
+                <p>{{selectNodeObj.REG_DATE || "-"}}</p>
+            </dd>
+        </dl>
+    </div>
+    <div class="4u$ 12u$(small)">
+        <dl>
+            <dt>총매출액</dt>
+            <dd>
+                <p>{{selectNodeObj.USDTotal || 0}} USD</p>
+                <p>{{selectNodeObj.BTCTotal || 0}} BTC</p>
+            </dd>
+        </dl>
+    </div>
+    <div class="4u$ 12u$(small)">
+
+        <dl>
+            <dt>총 보상</dt>
+            <dd>
+                <p>{{selectNodeObj.reward || 0}} BTC</p>
+            </dd>
+        </dl>
+    </div>
+</div>
+<pinch-zoom class="myhash-pinch-zoom" [draggableImage]="false" backgroundColor="rgb(255,255,255)">
+    <google-chart class="my-googleChart" [title]="title" [type]="type" [data]="data" [options]="options"
+        (select)="selectNode($event)" cdkDrag [cdkDragFreeDragPosition]="dragPosition" style="transform: scale(0.3)">
+    </google-chart>
+</pinch-zoom>
+<p>
+    <a class="button special small " (click)="resetDragPosition()">트리 처음 위치로</a>
+</p>
+<hr />
+
+<h4>{{selectNodeObj.USER_ID || ""}} 상품 목록</h4>
+<div class="table-wrapper" *ngIf="selectNodeObj.USER_ID.length != 0">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Item 1</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 2</td>
+                <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 3</td>
+                <td> Morbi faucibus arcu accumsan lorem.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 4</td>
+                <td>Vitae integer tempus condimentum.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 5</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>100.00</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<span class="button alt fit disabled" *ngIf="selectNodeObj.USER_ID.length == 0">데이터 없음.</span>
+<hr />
+
+<h4>{{selectNodeObj.USER_ID || ""}} 하부회원(5대) 목록</h4>
+<div class="table-wrapper" *ngIf="selectNodeObj.USER_ID.length != 0">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Item 1</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 2</td>
+                <td>Vis ac commodo adipiscing arcu aliquet.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 3</td>
+                <td> Morbi faucibus arcu accumsan lorem.</td>
+                <td>29.99</td>
+            </tr>
+            <tr>
+                <td>Item 4</td>
+                <td>Vitae integer tempus condimentum.</td>
+                <td>19.99</td>
+            </tr>
+            <tr>
+                <td>Item 5</td>
+                <td>Ante turpis integer aliquet porttitor.</td>
+                <td>29.99</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>100.00</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<span class="button alt fit disabled"
+    *ngIf="tableUserList[0].length==0 && tableUserList[1].length==0 &&tableUserList[2].length==0 &&tableUserList[3].length==0 &&tableUserList[4].length==0">데이터
+    없음.</span>
+
+<hr />

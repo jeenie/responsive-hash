@@ -1,0 +1,30 @@
+table {
+    position: relative;
+    border-collapse: collapse;
+}
+
+
+.myhash_fixed_header {
+    position: sticky;
+    top: 0
+}
+.myhash_coin_detail {
+    display: flex;
+}
+
+.myhash_coin_price_detail {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.myhash_date_font {
+    font-size: 12px;
+}
+
+@media(max-height: 812px) {
+    .myhahsh_container {
+    height: 812px;
+    margin-top:10px;
+    overflow: auto;
+}
+}

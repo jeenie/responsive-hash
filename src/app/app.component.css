@@ -1,0 +1,29 @@
+.myhash-menu {
+    font-size: 18px;
+}
+.myhash-menu:hover {
+    font: inherit;
+    color: #FFF;
+    
+}
+
+::ng-deep .mat-list-item-content {
+    font-size: 18px;
+}
+
+::ng-deep .mat-list-item-content:hover {
+    font: inherit;
+    color:#ffffff ;
+    font-size: 18px;
+}
+
+.mat-expansion-panel-header {
+    padding: 0;
+}
+
+@media(max-width: 768px) {
+    
+    .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+    background: rgba(0, 0, 0, 0.01); 
+    }
+}

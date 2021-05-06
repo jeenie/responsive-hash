@@ -1,0 +1,159 @@
+<mat-tab-group mat-align-tabs="start">
+    <mat-tab label="매출">
+        <dl style="margin-top: 5%;">
+            <dt>총 매출액</dt>
+            <dd>
+                <p style="float: right;">{{this.totalCoin.toFixed(8)}} BTC</p>
+                <p style="float: right;">{{this.totalUsd}}USD</p>
+            </dd>
+            
+        </dl>
+        <br/>
+        <hr/>
+
+        <!--
+            <form>
+            <label for="typeahead-focus">Search for a state:</label>
+            <input
+                id="typeahead-focus"
+                type="text"
+                class="form-control"
+                name="searchTerm" 
+                [(ngModel)]="searchTerm"
+                [ngbTypeahead]="search"
+                (focus)="focus$.next($any($event).target.value)"
+                (click)="click$.next($any($event).target.value)"
+                [formControl]="filter"
+                #instance="ngbTypeahead"
+            />
+        </form>
+
+        -->
+        <form (ngSubmit)="submit()">
+            <div class="form-group form-inline">
+                <label for="typeahead-focus">Search for a state:</label> 
+                    <div class="row uniform" style="width: 100%;">
+                        <div class="4u 9u$(small)">
+                            <input
+                                id="typeahead-focus"
+                                type="text"
+                                class="form-control"
+                                name="searchTerm" 
+                                [(ngModel)]="searchTerm"
+                                [ngbTypeahead]="search"
+                                (focus)="focus$.next($any($event).target.value)"
+                                (click)="click$.next($any($event).target.value)"
+                                [formControl]="filter"
+                                #instance="ngbTypeahead"
+                            />
+                        </div>
+                        <div class="2u$ 3u$(small)">
+                            <button type="submit" class="button special small fit myhash_search_btn" style="width:70px">조회</button>
+                        </div>
+                    </div>
+                
+                
+                
+            </div>
+            <span class="ml-3" *ngIf="loading$ | async">Loading...</span>
+            <select class="custom-select" style="width: auto; float:right" name="pageSize" [(ngModel)]="pageSize">
+                <option [ngValue]="20">20개 보이기</option>
+                <option [ngValue]="30">30개 보이기</option>
+                <option [ngValue]="40">40개 보이기</option>
+              </select>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col" sortable="userId" (sort)="onSort($event)">사용자 아이디</th>
+                    <th scope="col" sortable="totalCoin" (sort)="onSort($event)">BTC</th>
+                    <th scope="col" sortable="totalUsd" (sort)="onSort($event)">USD</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let userSales of allUserSalesList$| async">
+                  
+                  <td><ngb-highlight [result]="userSales.userId" [term]="searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="userSales.totalCoin.toFixed(8) | number" [term]="searchTerm"></ngb-highlight></td>
+                  <td><ngb-highlight [result]="userSales.totalUsd | number" [term]="searchTerm"></ngb-highlight></td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [collectionSize]="(total$ | async)!" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [directionLinks]="true" size="sm">
+                </ngb-pagination>
+            
+                
+              </div>
+
+        </form>
+        
+        <hr>
+        
+
+    </mat-tab>
+    <mat-tab label="보상">
+        <dl style="margin-top: 5%;">
+            <dt>총 매출 보상액</dt>
+            <dd>
+                <p style="float: right;">{{this.allTotalCoin.toFixed(8)}} BTC</p>
+                <p style="float: right;">{{this.allTotalUsd.toFixed(2)}} USD</p>
+            </dd>
+            
+        </dl>
+        <br/>
+        <hr/>
+
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" sortable="userId" (sort)="onRewardSort($event)">사용자 아이디</th>
+                        <th scope="col" sortable="totalCoin" (sort)="onRewardSort($event)" >BTC</th>
+                        <th scope="col" sortable="totalUsd" (sort)="onRewardSort($event)" >USD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let userReward of userRewardRealDataPagination">
+                        <td class="myhash_date_font">{{ userReward.userId }}</td>
+                        <td class="myhash_date_font">{{ userReward.totalCoin.toFixed(8) }}</td>
+                        <td class="myhash_date_font">{{ userReward.totalUsd.toFixed(2) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="rewardCollectionSize" [(page)]="page" [pageSize]="pageSize" [maxSize]="5" [rotate]="true" [ellipses]="false" [directionLinks]="true" size="sm" (pageChange)="refreshUserRewardData()">
+                </ngb-pagination>
+              
+                
+            </div>
+            
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!--
+
+<div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" sortable="userId" (sort)="onSort($event)">사용자 아이디</th>
+                        <th scope="col" sortable="totalCoin" (sort)="onSort($event)">BTC</th>
+                        <th scope="col" sortable="totalUsd" (sort)="onSort($event)">USD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let userSales of userSalesRealDataPagination">
+                        <td class="myhash_date_font">{{ userSales.userId }}</td>
+                        <td class="myhash_date_font">{{ userSales.totalCoin.toFixed(8) }}</td>
+                        <td class="myhash_date_font">{{ userSales.totalUsd }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+
+  -->

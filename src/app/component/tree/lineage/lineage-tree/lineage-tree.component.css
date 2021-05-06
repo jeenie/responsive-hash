@@ -1,0 +1,58 @@
+::ng-deep.treeNodeClass {
+  opacity: 1;
+  cursor: pointer;
+  /* zoom: 1.2; */
+}
+
+::ng-deep.selectedTreeNodeClass {
+  font-weight: bold;
+  cursor: pointer;
+  /* zoom: 1.4; */
+  background-color: rgb(203, 227, 241);
+  border-radius: 5px;
+}
+
+::ng-deep.myTooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+::ng-deep.myTooltip .myTooltiptext {
+  visibility: hidden;
+  width: 120px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 105%;
+  font-weight: normal;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+::ng-deep.myTooltip:hover .myTooltiptext {
+  visibility: visible;
+}
+
+::ng-deep.myTooltiptextBold {
+  font-size: 1.5em;
+}
+
+::ng-deep.dirNode {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+::ng-deep.my-googleChart .google-visualization-orgchart-table {
+  cursor: move;
+}
+
+.myhash-pinch-zoom {
+  height: 50vh; 
+  border:1px solid lightgray; 
+  margin-bottom: 1rem; 
+  background-color:  rgba(0, 0, 0, 0.01) !important;
+}
